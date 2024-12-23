@@ -19,3 +19,6 @@ class CategoryFailedState extends LayoutStates{}
 class ProductsLoadingState extends LayoutStates{}
 class ProductsSuccessState extends LayoutStates{}
 class ProductsFailedState extends LayoutStates{}
+
+//search for products state
+class SearchForProductsSuccessState extends LayoutStates{}

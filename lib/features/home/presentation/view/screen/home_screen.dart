@@ -27,7 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(vertical:20 , horizontal:20),
                 child:ListView(
                   children: [
-                    CustomTextFormField(),
+                    CustomTextFormField(
+                      onChanged:(input){
+                        cubit.searchForProducts(input: input);
+                      },
+                    ),
                     SizedBox(height: 20,),
                     cubit.banners.isNotEmpty ? SizedBox(
                        height:150,
@@ -116,10 +120,10 @@ class _HomeScreenState extends State<HomeScreen> {
                          mainAxisSpacing: 15,
                          childAspectRatio: 0.8,
                        ),
-                       itemCount: cubit.products.length,
+                       itemCount:cubit.searchItems.isNotEmpty ? cubit.searchItems.length : cubit.products.length,
                        itemBuilder: (context, index) {
                          return ProductItem(
-                             model: cubit.products[index],
+                             model:cubit.searchItems.isNotEmpty ? cubit.searchItems[index] : cubit.products[index],
                              cubit: cubit
                          );
                        }) : Center(child:CircularProgressIndicator(),),

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({super.key});
+  const CustomTextFormField({super.key , required this.onChanged});
+  final void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (input) {
-        //cubit.searchForItems(input: input);
-      },
+      onChanged:onChanged,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.search),
         suffixIcon: const Icon(Icons.clear),
