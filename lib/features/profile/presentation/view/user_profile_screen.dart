@@ -60,14 +60,17 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 25,),
-                    Container(
-                      color:Colors.grey.withValues(alpha: 0.2),
-                      child: const ListTile(
-                        leading:Icon(Icons.feedback , color:Colors.orangeAccent,),
-                        title: Text("FeedBack"),
-                        trailing:Icon(Icons.arrow_forward_ios_outlined , color:Colors.orangeAccent,),
-                      ),
-                    ),
+                Container(
+                  color:Colors.grey.withValues(alpha: 0.2),
+                  child: ListTile(
+                    onTap:(){
+                      context.read<ThemeCubit>().toggleTheme();
+                    },
+                    leading:Icon(Icons.change_circle , color:Colors.orangeAccent,),
+                    title: Text("ChangeTheme"),
+                    trailing:Icon(Icons.arrow_forward_ios_outlined , color:Colors.orangeAccent,),
+                  ),
+                ),
                     const SizedBox(height: 25,),
                     Container(
                       color:Colors.grey.withValues(alpha:0.2),

@@ -9,3 +9,4 @@ class UserProfileFailedState extends UserProfileStates{
   String? message;
   UserProfileFailedState({required this.message});
 }
+
