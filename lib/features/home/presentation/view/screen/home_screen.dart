@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/features/home/presentation/view/widgets/custom_smooth_indecator.dart';
 import 'package:shop_app/features/home/presentation/view/widgets/custom_text_form_field.dart';
+import 'package:shop_app/features/home/presentation/view/widgets/product_item.dart';
 import 'package:shop_app/features/layout/presentation/view_model/cubit/layout_cubit.dart';
 import 'package:shop_app/features/layout/presentation/view_model/cubit/layout_states.dart';
 
@@ -90,6 +91,38 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       ),
                     ) : Center(child:CircularProgressIndicator(),),
+                    SizedBox(height:20,),
+                    Row(
+                      mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Products" , style: TextStyle(
+                          fontSize: 25,
+                          fontWeight:FontWeight.bold,
+                        ),),
+                        Text("See all" ,style: TextStyle(
+                          fontSize: 18,
+                          fontWeight:FontWeight.bold,
+                          color:Colors.grey,
+                        ),),
+                      ],
+                    ),
+                   cubit.products.isNotEmpty ? GridView.builder(
+                       shrinkWrap: true,
+                       physics: const NeverScrollableScrollPhysics(),
+                       gridDelegate:
+                       const SliverGridDelegateWithFixedCrossAxisCount(
+                         crossAxisCount: 2,
+                         crossAxisSpacing: 15,
+                         mainAxisSpacing: 15,
+                         childAspectRatio: 0.8,
+                       ),
+                       itemCount: cubit.products.length,
+                       itemBuilder: (context, index) {
+                         return ProductItem(
+                             model: cubit.products[index],
+                             cubit: cubit
+                         );
+                       }) : Center(child:CircularProgressIndicator(),),
                   ],
                 ),
               ),

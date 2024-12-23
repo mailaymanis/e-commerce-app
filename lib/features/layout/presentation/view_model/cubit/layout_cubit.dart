@@ -4,11 +4,13 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/core/utils/helper/app_api.dart';
+import 'package:shop_app/core/utils/helper/app_constants.dart';
 import 'package:shop_app/features/cart/presentation/view/screen/cart_screen.dart';
 import 'package:shop_app/features/category/data/model/category_model.dart';
 import 'package:shop_app/features/category/presentation/view/screen/categories_screen.dart';
 import 'package:shop_app/features/favourite/presentation/view/screen/favourite_screen.dart';
 import 'package:shop_app/features/home/data/model/banners_model.dart';
+import 'package:shop_app/features/home/data/model/products_model.dart';
 import 'package:shop_app/features/home/presentation/view/screen/home_screen.dart';
 import 'package:shop_app/features/layout/presentation/view_model/cubit/layout_states.dart';
 import 'package:shop_app/features/profile/presentation/view/user_profile_screen.dart';
@@ -86,6 +88,43 @@ List<CategoryModel> categories = [];
         else
         {
           emit(CategoryFailedState());
+        }
+      }
+    }
+    catch(e)
+    {
+      print(e.toString());
+    }
+  }
+
+//products method logic
+List<ProductsModel> products = [];
+  void getProductsDate() async{
+    emit(ProductsLoadingState());
+    http.Response response = await http.get(
+      Uri.parse(AppApis.productsApi),
+      headers:{
+        'lang' : 'en',
+        'Authorization' : token!,
+      },
+    );
+    try
+    {
+      if(response.statusCode == 200)
+      {
+        var jsonDecoded = jsonDecode(response.body);
+        if(jsonDecoded['status'] == true)
+        {
+          for(var item in jsonDecoded['data']['products'])
+          {
+            products.add(ProductsModel.fromJson(data:item),);
+          }
+          emit(ProductsSuccessState());
+          debugPrint("products data is : $jsonDecoded");
+        }
+        else
+        {
+          emit(ProductsFailedState());
         }
       }
     }

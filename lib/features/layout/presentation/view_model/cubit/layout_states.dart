@@ -14,3 +14,8 @@ class BannersFailedState extends LayoutStates{}
 class CategoryLoadingState extends LayoutStates{}
 class CategorySuccessState extends LayoutStates{}
 class CategoryFailedState extends LayoutStates{}
+
+//products states
+class ProductsLoadingState extends LayoutStates{}
+class ProductsSuccessState extends LayoutStates{}
+class ProductsFailedState extends LayoutStates{}
