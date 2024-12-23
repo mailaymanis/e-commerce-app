@@ -51,6 +51,45 @@ class _HomeScreenState extends State<HomeScreen> {
                      ) : Center(child:CircularProgressIndicator(),),
                      SizedBox(height: 10,),
                     CustomSmoothIndecator(controller: pageController, cubit: cubit),
+                    SizedBox(height:20,),
+                    Row(
+                      mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Categories" , style: TextStyle(
+                          fontSize: 25,
+                          fontWeight:FontWeight.bold,
+                        ),),
+                        Text("See all" ,style: TextStyle(
+                          fontSize: 18,
+                          fontWeight:FontWeight.bold,
+                          color:Colors.grey,
+                        ),),
+                      ],
+                    ),
+                    SizedBox(height:20,),
+                    cubit.categories.isNotEmpty ? SizedBox(
+                      width:MediaQuery.sizeOf(context).width,
+                      height:120,
+                      child:ListView.separated(
+                        scrollDirection:Axis.horizontal,
+                        separatorBuilder:(context , index){
+                            return SizedBox(width: 10,);
+                          },
+                        itemCount:cubit.categories.length,
+                        itemBuilder:(context , index){
+                            return Column(
+                              spacing: 5,
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage:NetworkImage(cubit.categories[index].image!),
+                                  radius:40,
+                                ),
+                                Text(cubit.categories[index].name!),
+                              ],
+                            );
+                        },
+                      ),
+                    ) : Center(child:CircularProgressIndicator(),),
                   ],
                 ),
               ),

@@ -9,3 +9,8 @@ class BottomNavSuccessState extends LayoutStates{}
 class BannersLoadingState extends LayoutStates{}
 class BannersSuccessState extends LayoutStates{}
 class BannersFailedState extends LayoutStates{}
+
+//categories states
+class CategoryLoadingState extends LayoutStates{}
+class CategorySuccessState extends LayoutStates{}
+class CategoryFailedState extends LayoutStates{}

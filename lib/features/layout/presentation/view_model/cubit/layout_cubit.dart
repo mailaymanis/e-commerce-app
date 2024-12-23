@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/core/utils/helper/app_api.dart';
 import 'package:shop_app/features/cart/presentation/view/screen/cart_screen.dart';
+import 'package:shop_app/features/category/data/model/category_model.dart';
 import 'package:shop_app/features/category/presentation/view/screen/categories_screen.dart';
 import 'package:shop_app/features/favourite/presentation/view/screen/favourite_screen.dart';
 import 'package:shop_app/features/home/data/model/banners_model.dart';
@@ -57,6 +58,38 @@ List<BannersModel> banners = [];
       }
     }
     catch (e)
+    {
+      print(e.toString());
+    }
+  }
+
+//categories method logic
+List<CategoryModel> categories = [];
+  void getCategoriesData() async{
+    emit(CategoryLoadingState());
+    http.Response response = await http.get(
+      Uri.parse(AppApis.categoriesApi),
+    );
+    try
+    {
+      if(response.statusCode == 200)
+      {
+        var jsonDecoded = jsonDecode(response.body);
+        if(jsonDecoded['status'] == true)
+        {
+          for(var item in jsonDecoded['data']['data'])
+          {
+            categories.add(CategoryModel.fromJson(data: item),);
+          }
+          emit(CategorySuccessState());
+        }
+        else
+        {
+          emit(CategoryFailedState());
+        }
+      }
+    }
+    catch(e)
     {
       print(e.toString());
     }
