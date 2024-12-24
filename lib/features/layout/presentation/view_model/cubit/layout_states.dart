@@ -22,3 +22,8 @@ class ProductsFailedState extends LayoutStates{}
 
 //search for products state
 class SearchForProductsSuccessState extends LayoutStates{}
+
+//get favourite data states
+class FavouritesLoadingState extends LayoutStates{}
+class FavouritesSuccessState extends LayoutStates{}
+class FavouritesFailedState extends LayoutStates{}

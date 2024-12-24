@@ -125,4 +125,40 @@ class LayoutCubit extends Cubit<LayoutStates> {
         .toList();
     emit(SearchForProductsSuccessState());
   }
+
+  List<ProductsModel> favourites = [];
+  void getFavouritesData() async{
+    emit(FavouritesLoadingState());
+    http.Response response = await http.get(
+      Uri.parse(AppApis.favouritesApi),
+      headers: {
+        'lang' : 'en',
+        'Authorization' : token!,
+      },
+    );
+    try
+    {
+      if(response.statusCode == 200)
+      {
+        var jsonDecoded = jsonDecode(response.body);
+        if(jsonDecoded['status'] == true)
+        {
+          for(var item in jsonDecoded['data']['data'])
+          {
+            favourites.add(ProductsModel.fromJson(data:item['product']),);
+          }
+          debugPrint("number of favourite items is : ${favourites.length}");
+          emit(FavouritesSuccessState());
+        }
+        else
+        {
+          emit(FavouritesFailedState());
+        }
+      }
+    }
+    catch(e)
+    {
+      print(e.toString());
+    }
+  }
 }
