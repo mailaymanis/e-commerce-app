@@ -9,7 +9,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:(){},
+      onTap: () {},
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
         decoration: BoxDecoration(
@@ -37,22 +37,34 @@ class ProductItem extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child:Row(
-                    spacing:5,
+                  child: Row(
+                    spacing: 5,
                     children: [
-                      Text("${model.price.toString()}\$" ,style: TextStyle(
-                        fontSize: 16,
-                        fontWeight:FontWeight.bold
-                      ),),
-                      Text("${model.oldPrice.toString()}\$" , style: TextStyle(
-                        decoration:TextDecoration.lineThrough,
-                      ),)
+                      Text(
+                        "${model.price.toString()}\$",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "${model.oldPrice.toString()}\$",
+                        style: TextStyle(
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      )
                     ],
                   ),
                 ),
                 IconButton(
-                    onPressed:(){},
-                    icon:Icon(Icons.favorite)
+                  onPressed: () {
+                    cubit.addOrRemoveFromFavourites(
+                        productID: model.id.toString());
+                  },
+                  icon: Icon(
+                    Icons.favorite,
+                    color: cubit.favouritesID.contains(model.id.toString())
+                        ? Colors.red
+                        : Colors.white,
+                  ),
                 ),
               ],
             ),

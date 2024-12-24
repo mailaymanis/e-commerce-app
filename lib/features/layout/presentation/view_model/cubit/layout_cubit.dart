@@ -127,8 +127,10 @@ class LayoutCubit extends Cubit<LayoutStates> {
   }
 
   List<ProductsModel> favourites = [];
-  void getFavouritesData() async{
+  Set<String> favouritesID = {};
+  Future<void> getFavouritesData() async{
     emit(FavouritesLoadingState());
+    favourites.clear();
     http.Response response = await http.get(
       Uri.parse(AppApis.favouritesApi),
       headers: {
@@ -146,6 +148,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
           for(var item in jsonDecoded['data']['data'])
           {
             favourites.add(ProductsModel.fromJson(data:item['product']),);
+            favouritesID.add(item['product']['id'].toString());
           }
           debugPrint("number of favourite items is : ${favourites.length}");
           emit(FavouritesSuccessState());
@@ -161,4 +164,48 @@ class LayoutCubit extends Cubit<LayoutStates> {
       print(e.toString());
     }
   }
+
+//add or remove from favourites method logic
+void addOrRemoveFromFavourites({required String productID }) async{
+emit(AddOrRemoveFromFavouriteLoadingState());
+http.Response response = await http.post(
+  Uri.parse(AppApis.favouritesApi),
+  body:{
+    'product_id' : productID,
+  },
+  headers:{
+    'lang' : 'en',
+    'Authorization' : token!,
+  },
+);
+try
+{
+  if(response.statusCode == 200)
+  {
+     var jsonDecoded = jsonDecode(response.body);
+     if (jsonDecoded['status'] == true)
+     {
+         if(favouritesID.contains(productID)==true)
+         {
+           //remove products
+           favouritesID.remove(productID);
+         }
+         else
+         {
+           favouritesID.add(productID);
+         }
+         await getFavouritesData();
+         emit(AddOrRemoveFromFavouriteSuccessState());
+     }
+     else
+     {
+       emit(AddOrRemoveFromFavouriteFailedState());
+     }
+  }
+}
+catch(e)
+{
+  print(e.toString());
+}
+}
 }

@@ -27,3 +27,8 @@ class SearchForProductsSuccessState extends LayoutStates{}
 class FavouritesLoadingState extends LayoutStates{}
 class FavouritesSuccessState extends LayoutStates{}
 class FavouritesFailedState extends LayoutStates{}
+
+//add or remove from favourites states
+class AddOrRemoveFromFavouriteLoadingState extends LayoutStates{}
+class AddOrRemoveFromFavouriteSuccessState extends LayoutStates{}
+class AddOrRemoveFromFavouriteFailedState extends LayoutStates{}
