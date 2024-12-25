@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../auth/presentation/view/widgets/custom_button.dart';
 import '../../../../home/data/model/products_model.dart';
 import '../../../../layout/presentation/view_model/cubit/layout_cubit.dart';
 
@@ -52,7 +51,7 @@ class _DetailedScreenState extends State<DetailedScreen> {
                                   content:cubit.favouritesID.contains(widget.products.id.toString()) ?const Text(
                                     "Product deleted from favourites",
                                     style: TextStyle(fontSize: 20),
-                                  ) :const Text( "Product add to favourites",
+                                  ) : Text( "Product add to favourites",
                                     style: TextStyle(fontSize: 20),),
                                   backgroundColor:cubit.favouritesID.contains(widget.products.id.toString()) ? Colors.red : Colors.green,
                                   shape: OutlineInputBorder(
@@ -63,7 +62,7 @@ class _DetailedScreenState extends State<DetailedScreen> {
                             });
                           },
                           icon:Icon(Icons.favorite ,
-                            color:cubit.favouritesID.contains(widget.products.id.toString()) ? Colors.red : Colors.black ,
+                            color:cubit.favouritesID.contains(widget.products.id.toString()) ? Colors.red : Colors.white ,
                           ),),
                       ),
                     ),
@@ -107,11 +106,6 @@ class _DetailedScreenState extends State<DetailedScreen> {
                   fontWeight:FontWeight.bold,
                   fontSize: 15,
                 ),),
-                const SizedBox(height: 30,),
-                CustomButton(
-                    onPressed:(){},
-                    text: "Add to Cart"
-                ),
               ],
             ),
           ),
