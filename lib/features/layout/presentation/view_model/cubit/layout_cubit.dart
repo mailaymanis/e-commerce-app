@@ -126,6 +126,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     emit(SearchForProductsSuccessState());
   }
 
+//get favourites data method logic
   List<ProductsModel> favourites = [];
   Set<String> favouritesID = {};
   Future<void> getFavouritesData() async{
@@ -207,5 +208,90 @@ catch(e)
 {
   print(e.toString());
 }
+}
+
+//get cart data method logic
+List<ProductsModel> cart = [];
+Set<String> cartID = {};
+Future<void> getCartData() async{
+    emit(CartLoadingState());
+    cart.clear();
+    http.Response response = await http.get(
+      Uri.parse(AppApis.cartApi),
+      headers:{
+        'lang' : 'en',
+        'Authorization' : token!,
+      },
+    );
+    try
+    {
+      if (response.statusCode == 200)
+      {
+        var jsonDecoded = jsonDecode(response.body);
+        if (jsonDecoded['status'] == true)
+        {
+          for(var item in jsonDecoded['data']['cart_items'])
+          {
+            cart.add(ProductsModel.fromJson(data:item['product']),);
+            cartID.add(item['product']['id'].toString());
+          }
+          print("number of cart items is : ${cart.length}");
+          emit(CartSuccessState());
+        }
+        else
+        {
+          emit(CartFailedState());
+        }
+      }
+    }
+    catch(e)
+    {
+      print(e.toString());
+    }
+}
+
+//add or remove from favourites method logic
+void addOrRemoveFromCart({required String productID}) async{
+  emit(AddOrRemoveFromCartLoadingState());
+  http.Response response = await http.post(
+    Uri.parse(AppApis.cartApi),
+    body:{
+      'product_id' : productID,
+    },
+    headers:{
+      'lang' : 'en',
+      'Authorization' : token!,
+    },
+  );
+  try
+  {
+    if(response.statusCode == 200)
+    {
+      var jsonDecoded = jsonDecode(response.body);
+      if (jsonDecoded['status'] == true)
+      {
+        if(cartID.contains(productID) ==true)
+        {
+          //remove product from cart
+          cartID.remove(productID);
+        }
+        else
+        {
+          //add product to cart
+          cartID.add(productID);
+        }
+        await getCartData();
+        emit(AddOrRemoveFromCartSuccessState());
+      }
+      else
+      {
+        emit(AddOrRemoveFromCartFailedState());
+      }
+    }
+  }
+  catch(e)
+  {
+    print(e.toString());
+  }
 }
 }

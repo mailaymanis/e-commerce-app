@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/features/auth/data/shared/save_user_token.dart';
 import 'package:shop_app/features/profile/presentation/view_model/cubit/user_profile_cubit.dart';
 import 'package:shop_app/features/profile/presentation/view_model/cubit/user_profile_states.dart';
+
+import '../../../../core/utils/helper/app_routes.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
   @override
@@ -71,10 +74,14 @@ class ProfileScreen extends StatelessWidget {
                     trailing:Icon(Icons.arrow_forward_ios_outlined , color:Colors.orangeAccent,),
                   ),
                 ),
-                    const SizedBox(height: 25,),
+                     SizedBox(height: 25,),
                     Container(
                       color:Colors.grey.withValues(alpha:0.2),
-                      child: const ListTile(
+                      child: ListTile(
+                        onTap:(){
+                          // CacheSecureStorage.deleteUserToken(key: 'token');
+                          //  Navigator.pushReplacementNamed(context, MyRoutes.loginScreenRoute);
+                        },
                         leading:Icon(Icons.exit_to_app , color:Colors.orangeAccent,),
                         title: Text("Logout"),
                         trailing:Icon(Icons.arrow_forward_ios_outlined , color:Colors.orangeAccent,),

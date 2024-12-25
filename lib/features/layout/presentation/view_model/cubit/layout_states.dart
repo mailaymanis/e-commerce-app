@@ -32,3 +32,13 @@ class FavouritesFailedState extends LayoutStates{}
 class AddOrRemoveFromFavouriteLoadingState extends LayoutStates{}
 class AddOrRemoveFromFavouriteSuccessState extends LayoutStates{}
 class AddOrRemoveFromFavouriteFailedState extends LayoutStates{}
+
+//get cart data states
+class CartLoadingState extends LayoutStates{}
+class CartSuccessState extends LayoutStates{}
+class CartFailedState extends LayoutStates{}
+
+//add or remove from cart states
+class AddOrRemoveFromCartLoadingState extends LayoutStates{}
+class AddOrRemoveFromCartSuccessState extends LayoutStates{}
+class AddOrRemoveFromCartFailedState extends LayoutStates{}

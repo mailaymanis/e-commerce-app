@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/features/detailed/presentation/view/screen/detailed_screen.dart';
 import '../../../../layout/presentation/view_model/cubit/layout_cubit.dart';
 import '../../../data/model/products_model.dart';
 
@@ -9,16 +10,33 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => DetailedScreen(products: model)),
+        );
+      },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+        padding: EdgeInsets.symmetric(vertical: 2, horizontal: 12),
         decoration: BoxDecoration(
           color: Colors.grey.withValues(alpha: 0.2),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
-          spacing: 10,
+          spacing: 2,
           children: [
+            IconButton(
+              onPressed: () {
+                cubit.addOrRemoveFromCart(productID: model.id.toString());
+              },
+              icon: Icon(
+                Icons.shopping_cart,
+                color: cubit.cartID.contains(model.id.toString())
+                    ? Colors.red
+                    : Colors.white,
+              ),
+            ),
             Expanded(
               child: Image.network(
                 model.image!,
