@@ -14,7 +14,6 @@ import 'package:shop_app/features/home/data/model/banners_model.dart';
 import 'package:shop_app/features/home/data/model/products_model.dart';
 import 'package:shop_app/features/home/presentation/view/screen/home_screen.dart';
 import 'package:shop_app/features/layout/presentation/view_model/cubit/layout_states.dart';
-import 'package:shop_app/features/profile/presentation/view/change_password_screen.dart';
 import 'package:shop_app/features/profile/presentation/view/user_profile_screen.dart';
 import 'package:http/http.dart' as http;
 

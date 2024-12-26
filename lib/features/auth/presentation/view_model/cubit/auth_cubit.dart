@@ -65,7 +65,6 @@ void login({required String email , required String password}) async{
       'lang' : 'en',
     },
   );
-
   try
   {
     if(response.statusCode == 200)
