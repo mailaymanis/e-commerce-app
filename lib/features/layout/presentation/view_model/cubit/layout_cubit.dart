@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/core/utils/helper/app_api.dart';
 import 'package:shop_app/core/utils/helper/app_constants.dart';
+import 'package:shop_app/features/auth/data/shared/save_user_token.dart';
 import 'package:shop_app/features/cart/presentation/view/screen/cart_screen.dart';
 import 'package:shop_app/features/category/data/model/category_model.dart';
 import 'package:shop_app/features/category/presentation/view/screen/categories_screen.dart';
@@ -13,6 +14,7 @@ import 'package:shop_app/features/home/data/model/banners_model.dart';
 import 'package:shop_app/features/home/data/model/products_model.dart';
 import 'package:shop_app/features/home/presentation/view/screen/home_screen.dart';
 import 'package:shop_app/features/layout/presentation/view_model/cubit/layout_states.dart';
+import 'package:shop_app/features/profile/presentation/view/change_password_screen.dart';
 import 'package:shop_app/features/profile/presentation/view/user_profile_screen.dart';
 import 'package:http/http.dart' as http;
 
@@ -293,5 +295,42 @@ void addOrRemoveFromCart({required String productID}) async{
   {
     print(e.toString());
   }
+}
+
+//change password method logic
+void changePassword({required String currentPassword , required String newPassword}) async{
+emit(ChangePasswordLoadingState());
+http.Response response = await http.post(
+  Uri.parse(AppApis.changePasswordApi),
+  body:{
+    'current_password' : currentPassword,
+    'new_password' : newPassword,
+  },
+  headers:{
+    'lang' : 'en',
+    'Authorization' : token!,
+  },
+);
+try
+{
+  if (response.statusCode == 200)
+  {
+    var jsonDecoded = jsonDecode(response.body);
+    if (jsonDecoded['status'] == true)
+    {
+      await CacheSecureStorage.setUserToken(key: 'password', value: newPassword);
+      userPassword = await CacheSecureStorage.getUserToken(key: 'password');
+       emit(ChangePasswordSuccessState());
+    }
+    else
+    {
+      emit(ChangePasswordFailedState(errorMessage:jsonDecoded['message']),);
+    }
+  }
+}
+catch(e)
+{
+  print(e.toString());
+}
 }
 }

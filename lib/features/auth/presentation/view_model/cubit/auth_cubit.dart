@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shop_app/core/utils/helper/app_api.dart';
+import 'package:shop_app/core/utils/helper/app_constants.dart';
 import 'package:shop_app/features/auth/data/shared/save_user_token.dart';
 import 'package:shop_app/features/auth/presentation/view_model/cubit/auth_states.dart';
 import 'package:http/http.dart' as http;
@@ -73,6 +74,9 @@ void login({required String email , required String password}) async{
       if(jsonDecoded['status'] == true)
       {
         await CacheSecureStorage.setUserToken(key: 'token', value: jsonDecoded['data']['token']);
+        await CacheSecureStorage.setUserToken(key: 'password', value: password);
+        token = await CacheSecureStorage.getUserToken(key: 'token');
+        userPassword = await CacheSecureStorage.getUserToken(key: 'password');
         emit(LoginSuccessState());
         debugPrint("user login successfully and his data is : $jsonDecoded");
       }

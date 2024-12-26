@@ -42,3 +42,11 @@ class CartFailedState extends LayoutStates{}
 class AddOrRemoveFromCartLoadingState extends LayoutStates{}
 class AddOrRemoveFromCartSuccessState extends LayoutStates{}
 class AddOrRemoveFromCartFailedState extends LayoutStates{}
+
+//change password states
+class ChangePasswordLoadingState extends LayoutStates{}
+class ChangePasswordSuccessState extends LayoutStates{}
+class ChangePasswordFailedState extends LayoutStates{
+  String errorMessage;
+  ChangePasswordFailedState({required this.errorMessage});
+}

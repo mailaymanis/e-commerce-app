@@ -7,4 +7,5 @@ class AppApis{
   static String productsApi = "https://student.valuxapps.com/api/home";
   static String favouritesApi = "https://student.valuxapps.com/api/favorites";
   static String cartApi = "https://student.valuxapps.com/api/carts";
+  static String changePasswordApi = "https://student.valuxapps.com/api/change-password";
 }
