@@ -15,7 +15,7 @@ class UserProfileCubit extends Cubit<UserProfileStates> {
 //userProfile method logic
 //create instance from User Model
   UserModel? userModel;
-  void getUserProfileData() async {
+  Future<void> getUserProfileData() async {
     http.Response response = await http.get(
       Uri.parse(AppApis.userProfileApi),
       headers: {
@@ -48,6 +48,43 @@ class UserProfileCubit extends Cubit<UserProfileStates> {
       print(e.toString());
     }
   }
+
+//update profile method logic
+void updateProfile({required String name , required String email , required String phone}) async{
+    emit(UpdateProfileLoadingState());
+    http.Response response = await http.put(
+      Uri.parse(AppApis.updateProfileApi),
+      body:{
+        'name' : name,
+        'email' : email,
+        'phone' : phone,
+      },
+      headers:{
+        'lang' : 'en',
+        'Authorization' : token!,
+      },
+    );
+    try
+    {
+      if (response.statusCode == 200)
+      {
+        var jsonDecoded = jsonDecode(response.body);
+        if (jsonDecoded['status'] == true)
+        {
+          await getUserProfileData();
+          emit(UpdateProfileSuccessState());
+        }
+        else
+        {
+          emit(UpdateProfileFailedState(errorMessage: jsonDecoded['message']),);
+        }
+      }
+    }
+    catch(e)
+    {
+      print(e.toString());
+    }
+}
 }
 
 class ThemeCubit extends Cubit<ThemeData>{

@@ -10,3 +10,10 @@ class UserProfileFailedState extends UserProfileStates{
   UserProfileFailedState({required this.message});
 }
 
+//update profile states
+class UpdateProfileLoadingState extends UserProfileStates{}
+class UpdateProfileSuccessState extends UserProfileStates{}
+class UpdateProfileFailedState extends UserProfileStates{
+  String errorMessage;
+  UpdateProfileFailedState({required this.errorMessage});
+}

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/features/profile/presentation/view/change_password_screen.dart';
+import 'package:shop_app/features/profile/presentation/view/update_profile_screen.dart';
 import 'package:shop_app/features/profile/presentation/view_model/cubit/user_profile_cubit.dart';
 import 'package:shop_app/features/profile/presentation/view_model/cubit/user_profile_states.dart';
 
-import '../../../../core/utils/helper/app_routes.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
   @override
@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
                 child:Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text("My Profile" , style: TextStyle(
+                     Text("My Profile" , style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize:30,
                     ),),
@@ -60,6 +60,9 @@ class ProfileScreen extends StatelessWidget {
                     Container(
                       color:Colors.grey.withValues(alpha:0.2),
                       child: ListTile(
+                        onTap:(){
+                          Navigator.push(context, MaterialPageRoute(builder:(context) => UpdateProfileScreen()),);
+                        },
                         leading:Icon(Icons.update , color:Colors.orangeAccent,),
                         title: Text("Update Profile"),
                         trailing:Icon(Icons.arrow_forward_ios_outlined , color:Colors.orangeAccent,),
