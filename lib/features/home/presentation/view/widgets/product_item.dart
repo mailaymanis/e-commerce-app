@@ -52,39 +52,43 @@ class ProductItem extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    spacing: 5,
-                    children: [
-                      Text(
-                        "${model.price.toString()}\$",
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "${model.oldPrice.toString()}\$",
-                        style: TextStyle(
-                          decoration: TextDecoration.lineThrough,
+            SingleChildScrollView(
+              scrollDirection:Axis.horizontal,
+              child: SizedBox(
+                width:MediaQuery.sizeOf(context).width,
+                child: Row(
+                  children: [
+                    Row(
+                      spacing: 5,
+                      children: [
+                        Text(
+                          "${model.price.toString()}\$",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
-                      )
-                    ],
-                  ),
+                        Text(
+                          "${model.oldPrice.toString()}\$",
+                          style: TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        )
+                      ],
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        cubit.addOrRemoveFromFavourites(
+                            productID: model.id.toString());
+                      },
+                      icon: Icon(
+                        Icons.favorite,
+                        color: cubit.favouritesID.contains(model.id.toString())
+                            ? Colors.red
+                            : Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
-                IconButton(
-                  onPressed: () {
-                    cubit.addOrRemoveFromFavourites(
-                        productID: model.id.toString());
-                  },
-                  icon: Icon(
-                    Icons.favorite,
-                    color: cubit.favouritesID.contains(model.id.toString())
-                        ? Colors.red
-                        : Colors.white,
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),
