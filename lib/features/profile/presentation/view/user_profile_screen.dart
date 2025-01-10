@@ -1,9 +1,13 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/features/profile/presentation/view/change_password_screen.dart';
 import 'package:shop_app/features/profile/presentation/view/update_profile_screen.dart';
 import 'package:shop_app/features/profile/presentation/view_model/cubit/user_profile_cubit.dart';
 import 'package:shop_app/features/profile/presentation/view_model/cubit/user_profile_states.dart';
+
+import '../../../../core/utils/helper/app_routes.dart';
+import '../../../auth/data/shared/save_user_token.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -85,8 +89,18 @@ class ProfileScreen extends StatelessWidget {
                       color:Colors.grey.withValues(alpha:0.2),
                       child: ListTile(
                         onTap:(){
-                          // CacheSecureStorage.deleteUserToken(key: 'token');
-                          //  Navigator.pushReplacementNamed(context, MyRoutes.loginScreenRoute);
+                          AwesomeDialog(
+                            context: context,
+                            animType:AnimType.rightSlide,
+                            dialogType:DialogType.warning,
+                            title:"Logout",
+                            desc:"Are you sure that you want to confirm existing the app",
+                            btnCancelOnPress:(){},
+                            btnOkOnPress:(){
+                              CacheSecureStorage.deleteUserToken(key: 'token');
+                              Navigator.pushReplacementNamed(context, MyRoutes.loginScreenRoute);
+                            },
+                          ).show();
                         },
                         leading:Icon(Icons.exit_to_app , color:Colors.orangeAccent,),
                         title: Text("Logout"),
