@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocConsumer<LayoutCubit , LayoutStates>(
       listener:(context , state){},
       builder:(context , state){
-        return Skeletonizer(
+        return cubit.categories.isNotEmpty && cubit.products.isNotEmpty && cubit.banners.isNotEmpty ? Skeletonizer(
           enabled:isLoading,
           effect:ShimmerEffect(
             duration:Duration(seconds:3),
@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               )
           ),
-        );
+        ) : Center(child:CircularProgressIndicator(),);
       },
     );
   }
