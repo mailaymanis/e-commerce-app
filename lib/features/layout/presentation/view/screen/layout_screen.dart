@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shop_app/features/layout/presentation/view_model/cubit/layout_cubit.dart';
 import 'package:shop_app/features/layout/presentation/view_model/cubit/layout_states.dart';
 
@@ -8,33 +9,37 @@ class LayoutScreen extends StatefulWidget {
   @override
   State<LayoutScreen> createState() => _LayoutScreenState();
 }
+
 class _LayoutScreenState extends State<LayoutScreen> {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<LayoutCubit>(context);
-    return BlocConsumer<LayoutCubit , LayoutStates>(
-      listener:(context , state){},
-      builder:(context , state){
+    return BlocConsumer<LayoutCubit, LayoutStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
         return Scaffold(
-          bottomNavigationBar:BottomNavigationBar(
-            currentIndex:cubit.bottomNavIndex,
-            onTap:(index){
+          bottomNavigationBar: SalomonBottomBar(
+            currentIndex: cubit.bottomNavIndex,
+            onTap: (index) {
               cubit.changeBottomNav(index: index);
             },
-            selectedItemColor:Colors.orangeAccent,
-            unselectedItemColor:Colors.grey,
-            selectedIconTheme:const IconThemeData(size: 30,),
-            type:BottomNavigationBarType.fixed,
-            backgroundColor:Colors.black54,
-            items:[
-              BottomNavigationBarItem(icon:Icon(Icons.home) , label: "Home"),
-              BottomNavigationBarItem(icon:Icon(Icons.category) , label: "Categories"),
-              BottomNavigationBarItem(icon:Icon(Icons.favorite_outlined) , label: "Favourites"),
-              BottomNavigationBarItem(icon:Icon(Icons.shopping_cart) , label: "Cart"),
-              BottomNavigationBarItem(icon:Icon(Icons.person) , label: "Profile"),
+            selectedItemColor: Colors.orangeAccent,
+            unselectedItemColor: Colors.grey,
+            backgroundColor: Colors.black54,
+            items: [
+              SalomonBottomBarItem(icon: Icon(Icons.home), title: Text("Home") , selectedColor:Colors.purple),
+              SalomonBottomBarItem(
+                  icon: Icon(Icons.category), title: Text("Categories") , selectedColor:Colors.orange),
+              SalomonBottomBarItem(
+                  icon: Icon(Icons.favorite_outlined),
+                  title: Text("Favourites") , selectedColor:Colors.pink),
+              SalomonBottomBarItem(
+                  icon: Icon(Icons.shopping_cart), title: Text("Cart") , selectedColor:Colors.green),
+              SalomonBottomBarItem(
+                  icon: Icon(Icons.person), title: Text("Profile") , selectedColor:Colors.blue),
             ],
           ),
-          body:cubit.layoutScreens[cubit.bottomNavIndex],
+          body: cubit.layoutScreens[cubit.bottomNavIndex],
         );
       },
     );
