@@ -4,4 +4,5 @@ class MyRoutes{
   static String homeScreenRoute = "HomeScreenRoute";
   static String changePasswordRoute = "ChangePasswordRoute";
   static String profileScreenRoute = "ProfileScreenRoute";
+  static String layoutScreenRoute = "LayoutScreenRoute";
 }

@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
           const Center(child: CircularProgressIndicator(),);
         }
         else if(state is LoginSuccessState){
-          Navigator.pushReplacementNamed(context, MyRoutes.homeScreenRoute);
+          Navigator.pushReplacementNamed(context, MyRoutes.layoutScreenRoute);
         }
         else if(state is LoginFailedState){
           showDialog(context: context, builder: (context) => AlertDialog(

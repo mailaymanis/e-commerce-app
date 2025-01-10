@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
                 MyRoutes.homeScreenRoute: (context) => const HomeScreen(),
                 MyRoutes.changePasswordRoute : (context) => const ChangePasswordScreen(),
                 MyRoutes.profileScreenRoute : (context) => const ProfileScreen(),
+                MyRoutes.layoutScreenRoute : (context) => const LayoutScreen(),
               },
             );
           },

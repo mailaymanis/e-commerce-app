@@ -15,9 +15,11 @@ dependencies:
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
   http: ^1.2.2
-  flutter_secure_storage: ^9.2.2
+  flutter_secure_storage: ^9.2.4
   smooth_page_indicator: ^1.2.0+3
-  shared_preferences: ^2.3.4
+  shared_preferences: ^2.3.5
+  salomon_bottom_bar: ^3.3.2
+  skeletonizer: ^1.4.3
 
 dev_dependencies:
   flutter_test:
