@@ -89,15 +89,19 @@ class _DetailedScreenState extends State<DetailedScreen> {
                       ),
                     ],
                   ),
-                  Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    height: 280,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(widget.products.image!),
-                            filterQuality: FilterQuality.high,
-                            fit:BoxFit.fill
-                        )),
+                  SizedBox(height: 10,),
+                  ClipRRect(
+                     borderRadius:BorderRadius.circular(12),
+                    child: Container(
+                      //width: MediaQuery.sizeOf(context).width,
+                      constraints:BoxConstraints(maxHeight:300 , maxWidth:MediaQuery.sizeOf(context).width),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(widget.products.image!),
+                              filterQuality: FilterQuality.high,
+                              fit:BoxFit.fill
+                          )),
+                    ),
                   ),
                   const SizedBox(height: 10,),
                   const Text("Name : " , style: TextStyle(
