@@ -20,26 +20,29 @@ class _LayoutScreenState extends State<LayoutScreen> {
         return Scaffold(
           bottomNavigationBar: SingleChildScrollView(
             scrollDirection:Axis.horizontal,
-            child: SalomonBottomBar(
-              currentIndex: cubit.bottomNavIndex,
-              onTap: (index) {
-                cubit.changeBottomNav(index: index);
-              },
-              selectedItemColor: Colors.orangeAccent,
-              unselectedItemColor: Colors.grey,
-              backgroundColor: Colors.black54,
-              items: [
-                SalomonBottomBarItem(icon: Icon(Icons.home), title: Text("Home") , selectedColor:Colors.purple),
-                SalomonBottomBarItem(
-                    icon: Icon(Icons.category), title: Text("Categories") , selectedColor:Colors.orange),
-                SalomonBottomBarItem(
-                    icon: Icon(Icons.favorite_outlined),
-                    title: Text("Favourites") , selectedColor:Colors.pink),
-                SalomonBottomBarItem(
-                    icon: Icon(Icons.shopping_cart), title: Text("Cart") , selectedColor:Colors.green),
-                SalomonBottomBarItem(
-                    icon: Icon(Icons.person), title: Text("Profile") , selectedColor:Colors.blue),
-              ],
+            child: SizedBox(
+              width:MediaQuery.sizeOf(context).width,
+              child: SalomonBottomBar(
+                currentIndex: cubit.bottomNavIndex,
+                onTap: (index) {
+                  cubit.changeBottomNav(index: index);
+                },
+                selectedItemColor: Colors.orangeAccent,
+                unselectedItemColor: Colors.grey,
+                backgroundColor: Colors.black54,
+                items: [
+                  SalomonBottomBarItem(icon: Icon(Icons.home), title: Text("Home") , selectedColor:Colors.purple),
+                  SalomonBottomBarItem(
+                      icon: Icon(Icons.category), title: Text("Categories") , selectedColor:Colors.orange),
+                  SalomonBottomBarItem(
+                      icon: Icon(Icons.favorite_outlined),
+                      title: Text("Favourites") , selectedColor:Colors.pink),
+                  SalomonBottomBarItem(
+                      icon: Icon(Icons.shopping_cart), title: Text("Cart") , selectedColor:Colors.green),
+                  SalomonBottomBarItem(
+                      icon: Icon(Icons.person), title: Text("Profile") , selectedColor:Colors.blue),
+                ],
+              ),
             ),
           ),
           body: cubit.layoutScreens[cubit.bottomNavIndex],
