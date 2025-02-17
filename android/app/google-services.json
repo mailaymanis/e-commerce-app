@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "306276383743",
+    "project_id": "shop-app-6db3b",
+    "storage_bucket": "shop-app-6db3b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306276383743:android:eb598fc742da033f4885ca",
+        "android_client_info": {
+          "package_name": "com.example.shop_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqT8p-hDjuFqbZI4rrheAt2NZTGNzwebo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
